@@ -8,7 +8,6 @@ import org.javaboy.vhr.model.RespBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.sql.PreparedStatement;
 import java.util.List;
 
 @RestController
@@ -45,6 +44,19 @@ public class PositionController {
             return RespBean.ok("删除成功");
         }else {
             return RespBean.error("删除失败");
+        }
+    }
+
+    /**
+     * 批量删除
+     */
+
+    @DeleteMapping("/")
+    public RespBean deletePositionByIds(Integer[] ids){
+        if (positionService.deletePositionsByIds(ids)==ids.length){
+            return RespBean.ok("删除成功");
+        }else {
+           return RespBean.error("删除失败");
         }
     }
 
