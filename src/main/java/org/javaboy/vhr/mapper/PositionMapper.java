@@ -26,4 +26,6 @@ public interface PositionMapper {
     Integer updateByOwn(Position position);
 
     Integer deleteByOwn(@Param("id") Integer id);
+
+    Integer deletePositionsByIds(@Param("ids") Integer[] ids);
 }

@@ -1,6 +1,7 @@
 package org.javaboy.vhr.Service;
 
 
+import org.apache.ibatis.annotations.Param;
 import org.javaboy.vhr.mapper.PositionMapper;
 import org.javaboy.vhr.model.Position;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,5 +33,9 @@ public class PositionService {
 
     public Integer deletePositionById(@PathVariable Integer id){
         return positionMapper.deleteByOwn(id);
+    }
+
+    public Integer deletePositionsByIds(Integer[] ids) {
+        return positionMapper.deletePositionsByIds(ids);
     }
 }
