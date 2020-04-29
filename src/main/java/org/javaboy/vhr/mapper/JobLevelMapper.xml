@@ -25,7 +25,7 @@
     insert into joblevel (id, name, titleLevel,
       createDate, enabled)
     values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{titleLevel,jdbcType=CHAR},
-      #{createdate,jdbcType=TIMESTAMP}, #{enabled,jdbcType=BIT})
+      #{createDate,jdbcType=TIMESTAMP}, #{enabled,jdbcType=BIT})
   </insert>
   <insert id="insertSelective" parameterType="org.javaboy.vhr.model.JobLevel" >
     insert into joblevel
@@ -56,8 +56,8 @@
       <if test="titleLevel != null" >
         #{titleLevel,jdbcType=CHAR},
       </if>
-      <if test="createdate != null" >
-        #{createdate,jdbcType=TIMESTAMP},
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
       </if>
       <if test="enabled != null" >
         #{enabled,jdbcType=BIT},
@@ -66,7 +66,7 @@
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="org.javaboy.vhr.model.JobLevel" >
     update joblevel
-    <set >
+    <set>
       <if test="name != null" >
         name = #{name,jdbcType=VARCHAR},
       </if>
@@ -74,7 +74,7 @@
         titleLevel = #{titleLevel,jdbcType=CHAR},
       </if>
       <if test="createDate != null" >
-        createDate = #{createdate,jdbcType=TIMESTAMP},
+        createDate = #{createDate,jdbcType=TIMESTAMP},
       </if>
       <if test="enabled != null" >
         enabled = #{enabled,jdbcType=BIT},
@@ -86,11 +86,18 @@
     update joblevel
     set name = #{name,jdbcType=VARCHAR},
       titleLevel = #{titleLevel,jdbcType=CHAR},
-      createDate = #{createdate,jdbcType=TIMESTAMP},
+      createDate = #{createDate,jdbcType=TIMESTAMP},
       enabled = #{enabled,jdbcType=BIT}
     where id = #{id,jdbcType=INTEGER}
   </update>
   <select id="getAlljobLevels" resultMap="BaseResultMap">
     select * from joblevel;
   </select>
+  <delete id="deleteJobLevelsByIds">
+    delete from joblevel
+    where id in
+    <foreach collection="ids" item="id" open="("  close=")" separator=",">
+      #{id}
+    </foreach>
+  </delete>
 </mapper>
