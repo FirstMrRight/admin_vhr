@@ -33,7 +33,7 @@ public class JobLevelService {
         return jobLevelMapper.deleteByPrimaryKey(id);
     }
 
-    public int deleteJobLevelsById(Integer[] ids) {
+    public Integer deleteJobLevelsById(Integer[] ids) {
         return jobLevelMapper.deleteJobLevelsByIds(ids);
     }
 }
