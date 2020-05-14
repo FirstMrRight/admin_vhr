@@ -35,10 +35,41 @@
     </collection>
   </resultMap>
 
-
+<resultMap id="MenuWithChildren" type="org.javaboy.vhr.model.Menu" extends="BaseResultMap">
+  <id column="id1" property="id"/>
+  <result column="name1" property="name"/>
+  <collection property="children" ofType="org.javaboy.vhr.model.Menu">
+    <id column="id2" property="id"/>
+    <result column="name2" property="name"/>
+    <collection property="children" ofType="org.javaboy.vhr.model.Menu">
+      <id column="id3" property="id"/>
+      <result column="name3" property="name"/>
+    </collection>
+  </collection>
+</resultMap>
   <sql id="Base_Column_List" >
     id, url, path, component, name, iconCls, keepAlive, requireAuth, parentId, enabled
   </sql>
+
+  <select id="getAllmenus" resultMap="MenuWithChildren">
+    -- 笛卡尔积
+SELECT
+m1.id as id1,
+m1.`name` as name1,
+m2.`id` as id2,
+m2.`name` as name2,
+m3.id as id3,
+m3.name as name3
+FROM menu m1,menu m2,menu m3
+where m1.id=m2.parentId
+and m2.id=m3.parentId
+and m3.enabled= true
+ORDER BY
+m1.`id`,
+m2.id,
+m3.id
+  </select>
+
 <!--根据Hrid获取用户的各种信息   resultMap的数据:复杂：一对一的meta属性，一对多的chirld属性-->
   <select id="getMenuByHrId" resultMap="Menus2">
     SELECT DISTINCT m1.*,
