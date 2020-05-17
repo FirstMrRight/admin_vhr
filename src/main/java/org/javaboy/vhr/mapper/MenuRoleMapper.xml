@@ -10,7 +10,7 @@
     id, mid, rid
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
+    select
     <include refid="Base_Column_List" />
     from menu_role
     where id = #{id,jdbcType=INTEGER}
@@ -66,4 +66,20 @@
       rid = #{rid,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+    <delete id="deleteByRid">
+      delete from menu_role where rid = #{rid,jdbcType=INTEGER}
+    </delete>
+<!--  <insert id="insertRecord">-->
+<!--    insert into menu_role (mid,rid) values-->
+<!--    <foreach collection="mids" separator="," item="mid">-->
+<!--      (#{mid},#{rid})-->
+<!--    </foreach>-->
+<!--  </insert>-->
+
+  <insert id="insertRecord">
+    insert into menu_role (mid,rid) values
+    <foreach collection="mids" separator="," item="mid">
+      (#{mid},#{rid})
+    </foreach>
+  </insert>
 </mapper>

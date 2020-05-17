@@ -47,9 +47,18 @@
     </collection>
   </collection>
 </resultMap>
+
   <sql id="Base_Column_List" >
     id, url, path, component, name, iconCls, keepAlive, requireAuth, parentId, enabled
   </sql>
+
+  <select id="getMidsByRid" resultType="java.lang.Integer">
+    select mid
+    from
+    menu_role
+    where rid = #{rid,jdbcType=INTEGER}
+  </select>
+
 
   <select id="getAllmenus" resultMap="MenuWithChildren">
     -- 笛卡尔积
