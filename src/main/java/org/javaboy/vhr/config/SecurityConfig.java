@@ -263,6 +263,7 @@ CustomUrlDesicionManager customUrlDesicionManager;
                     @Override
                     public void commence(HttpServletRequest req, HttpServletResponse resp, AuthenticationException authException) throws IOException, ServletException {
                         resp.setContentType("application/json;charset=utf-8");
+                        //为解决session过期而出现重启项目导致的问题，给前端一个状态码，401状态时，自动跳转到login
                         resp.setStatus(401);
                         PrintWriter out = resp.getWriter();
                         RespBean respBean = RespBean.error("访问失败!");
