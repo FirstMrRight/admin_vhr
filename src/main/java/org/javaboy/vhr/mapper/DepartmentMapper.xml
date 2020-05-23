@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="org.javaboy.vhr.mapper.DepartmentMapper" >
-  <resultMap id="BaseResultMap" type="org.javaboy.vhr.model.Department" >
-    <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="name" property="name" jdbcType="VARCHAR" />
-    <result column="parentId" property="parentId" jdbcType="INTEGER" />
-    <result column="depPath" property="depPath" jdbcType="VARCHAR" />
-    <result column="enabled" property="enabled" jdbcType="BIT" />
-    <result column="isParent" property="isParent" jdbcType="BIT" />
+  <resultMap id="BaseResultMap" type="org.javaboy.vhr.model.Department">
+    <id column="id" property="id" jdbcType="INTEGER"/>
+    <result column="name" property="name" jdbcType="VARCHAR"/>
+    <result column="parentId" property="parentId" jdbcType="INTEGER"/>
+    <result column="depPath" property="depPath" jdbcType="VARCHAR"/>
+    <result column="enabled" property="enabled" jdbcType="BIT"/>
+    <result column="isParent" property="isParent" jdbcType="BIT"/>
   </resultMap>
   <sql id="Base_Column_List" >
     id, name, parentId, depPath, enabled, isParent
@@ -17,6 +17,16 @@
   <resultMap id="DepartmentWithChildren" type="org.javaboy.vhr.model.Department" extends="BaseResultMap">
     <collection property="children" ofType="org.javaboy.vhr.model.Department" select="org.javaboy.vhr.mapper.DepartmentMapper.getAllDepartmentsByParentId" column="id"/>
   </resultMap>
+
+  <!--调用存储过程统一使用select-->
+<!--  <select id="addDep" statementType="CALLABLE">-->
+<!--    call addDep(#{name,mode=IN,jdbcType=VARCHAR},#{parentId,mode=IN,jdbcType=INTEGER},-->
+<!--    #{enabled,mode=IN,jdbcType=BOOLEAN},#{result,mode=OUT,jdbcType=INTEGER},-->
+<!--    #{id,mode=OUT,jdbcType=INTEGER})-->
+<!--  </select>-->
+  <select id="addDep" statementType="CALLABLE">
+    call addDep(#{name,mode=IN,jdbcType=VARCHAR},#{parentId,mode=IN,jdbcType=INTEGER},#{enabled,mode=IN,jdbcType=BOOLEAN},#{result,mode=OUT,jdbcType=INTEGER},#{id,mode=OUT,jdbcType=INTEGER})
+  </select>
   <select id="getAllDepartmentsByParentId" resultMap="DepartmentWithChildren">
     select * from department where parentId=#{pid,jdbcType=VARCHAR}
   </select>

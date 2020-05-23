@@ -2,10 +2,9 @@ package org.javaboy.vhr.controller.system.basic;
 
 import org.javaboy.vhr.Service.DepartmentService;
 import org.javaboy.vhr.model.Department;
+import org.javaboy.vhr.model.RespBean;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -22,6 +21,16 @@ public class DepartmentController {
     @GetMapping("/")
     public List<Department> getAllDepartments(){
         return departmentService.getAllDepartments();
+    }
+
+    @PostMapping("/")
+    public RespBean addDep(@RequestBody Department dep){
+        departmentService.addDep(dep);
+        if (dep.getResult() == 1){
+            return RespBean.ok("添加成功",dep);
+        }else {
+            return RespBean.error("添加失败",dep);
+        }
     }
 
 }
