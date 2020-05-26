@@ -8,6 +8,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 
 @Service
 public class HrService implements UserDetailsService {
@@ -23,5 +25,15 @@ public class HrService implements UserDetailsService {
         }
         hr.setRoles(hrMapper.getHrRolesById(hr.getId()));
         return hr;
+    }
+
+    /**
+     * 都是Hr,查询的时候把自己去掉
+     * 需要把自己的id传进去
+     * @return
+     * @param id
+     */
+    public List<Hr> getAllHrs(Integer id) {
+        return hrMapper.getAllHrs(id);
     }
 }

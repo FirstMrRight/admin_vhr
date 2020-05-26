@@ -13,6 +13,14 @@
     <result column="userface" property="userface" jdbcType="VARCHAR" />
     <result column="remark" property="remark" jdbcType="VARCHAR" />
   </resultMap>
+
+  <resultMap id="HrWithRoles" type="org.javaboy.vhr.model.Hr" extends="BaseResultMap">
+    <collection property="roles" ofType="org.javaboy.vhr.model.Role">
+      <id column="rid" property="id"></id>
+      <result column="rname" property="name"></result>
+      <result column="rnameZh" property="nameZh"></result>
+    </collection>
+  </resultMap>
   <sql id="Base_Column_List" >
     id, name, phone, telephone, address, enabled, username, password, userface, remark
   </sql>
@@ -161,4 +169,22 @@
       remark = #{remark,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+    <select id="getAllHrs" resultMap="HrWithRoles">
+      SELECT
+	hr.username,
+	hr.userface,
+	hr.telephone,
+	hr.phone,
+	hr.`name`,
+	hr.enabled,
+	hr.address,
+	r.`name` AS rname,
+	r.nameZh AS rnameZh
+FROM
+	hr
+	LEFT JOIN hr_role hrr ON hr.id = hrr.hrid
+	LEFT JOIN role r ON hrr.rid = r.id
+WHERE
+	hr.id != #{id,jdbcType=INTEGER}
+    </select>
 </mapper>
