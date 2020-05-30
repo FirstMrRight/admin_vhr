@@ -1,5 +1,6 @@
 package org.javaboy.vhr.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -119,6 +120,9 @@ public class Hr implements UserDetails {
     }
 
     @Override
+    //传递泛型   使用在实体类的方法或者属性上，在实体类向前台返回数据时用来忽略不想传递给前台的属性或接口。
+    //说人话就是生成Json时，该属性值不传给前端属性
+    @JsonIgnore
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<SimpleGrantedAuthority> authorities =new ArrayList<>(roles.size());
         for (Role role : roles) {

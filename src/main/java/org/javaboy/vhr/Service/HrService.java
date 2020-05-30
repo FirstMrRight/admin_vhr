@@ -36,4 +36,8 @@ public class HrService implements UserDetailsService {
     public List<Hr> getAllHrs(Integer id) {
         return hrMapper.getAllHrs(id);
     }
+
+    public Integer updateHr(Hr hr) {
+        return hrMapper.updateHr(hr);
+    }
 }

@@ -187,4 +187,43 @@ FROM
 WHERE
 	hr.id != #{id,jdbcType=INTEGER}
     </select>
+    <update id="updateHr" parameterType="org.javaboy.vhr.model.Hr">
+      update Hr
+      <set>
+        <if test="id != null">
+          id = #{id,jdbcType=INTEGER}
+        </if>
+        <if test="name != null">
+          name = #{name,jdbcType=VARCHAR}
+        </if>
+        <if test="phone != null">
+          phone = #{phone,jdbcType=VARCHAR}
+        </if>
+        <if test="telephone != null">
+          telephone = #{telephone,jdbcType=VARCHAR}
+        </if>
+        <if test="address != null">
+            address = #{address,jdbcType=VARCHAR}
+        </if>
+        <if test="enabled != null">
+          enabled = #{enabled,jdbcType=BIT}
+        </if>
+        <if test="username != null">
+          username = #{username,jdbcType=VARCHAR}
+        </if>
+        <if test="password != null">
+          password = #{password,jdbcType=VARCHAR}
+        </if>
+        <if test="userface != null">
+          userface = #{userface,jdbcType=VARCHAR}
+        </if>
+        <if test="remark != null">
+          remark = #{remark,jdbcType=VARCHAR}
+        </if>
+<!--        <if test="roles != null">-->
+<!--          roles = #{roles}-->
+<!--        </if>-->
+        where id = #{id,jdbcType=INTEGER}
+      </set>
+    </update>
 </mapper>
