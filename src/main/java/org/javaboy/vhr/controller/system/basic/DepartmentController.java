@@ -25,13 +25,12 @@ public class DepartmentController {
     }
 
     @PostMapping("/")
-    public RespBean addDep(@RequestBody Department dep){
+    public RespBean addDep(@RequestBody Department dep) {
         departmentService.addDep(dep);
-        if (dep.getResult() == 1){
-            return RespBean.ok("添加成功",dep);
-        }else {
-            return RespBean.error("添加失败",dep);
+        if (dep.getResult() == 1) {
+            return RespBean.ok("添加成功", dep);
         }
+        return RespBean.error("添加失败");
     }
 
     @DeleteMapping("/{id}")

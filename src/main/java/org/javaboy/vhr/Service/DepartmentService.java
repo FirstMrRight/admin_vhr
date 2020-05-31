@@ -30,7 +30,6 @@ public class DepartmentService {
         dep.setEnabled(true);
         departmentMapper.addDep(dep);
     }
-
     public void deleteDepById(Department dep) {
         departmentMapper.deleteDepById(dep);
     }
