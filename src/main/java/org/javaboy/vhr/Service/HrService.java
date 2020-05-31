@@ -38,6 +38,6 @@ public class HrService implements UserDetailsService {
     }
 
     public Integer updateHr(Hr hr) {
-        return hrMapper.updateHr(hr);
+        return hrMapper.updateByPrimaryKeySelective(hr);
     }
 }

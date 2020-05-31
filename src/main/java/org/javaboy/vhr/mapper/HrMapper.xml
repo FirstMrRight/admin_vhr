@@ -171,6 +171,7 @@
   </update>
     <select id="getAllHrs" resultMap="HrWithRoles">
       SELECT
+      hr.id,
 	hr.username,
 	hr.userface,
 	hr.telephone,
