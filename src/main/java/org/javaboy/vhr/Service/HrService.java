@@ -1,12 +1,14 @@
 package org.javaboy.vhr.Service;
 
 import org.javaboy.vhr.mapper.HrMapper;
+import org.javaboy.vhr.mapper.HrRoleMapper;
 import org.javaboy.vhr.model.Hr;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -14,6 +16,8 @@ import java.util.List;
 @Service
 public class HrService implements UserDetailsService {
 @Autowired HrMapper hrMapper;
+@Autowired
+    HrRoleMapper hrRoleMapper;
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         /*
@@ -39,5 +43,12 @@ public class HrService implements UserDetailsService {
 
     public Integer updateHr(Hr hr) {
         return hrMapper.updateByPrimaryKeySelective(hr);
+    }
+
+    @Transactional
+    //先删除hr表中的权限数据再添加新数据
+    public Boolean updateHrRole(Integer hrid,Integer[] rids) {
+        hrRoleMapper.deleteByHrId(hrid);
+        return hrRoleMapper.addRole(hrid,rids) == rids.length;
     }
 }

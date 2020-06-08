@@ -179,6 +179,7 @@
 	hr.`name`,
 	hr.enabled,
 	hr.address,
+	r.id as rid,
 	r.`name` AS rname,
 	r.nameZh AS rnameZh
 FROM
