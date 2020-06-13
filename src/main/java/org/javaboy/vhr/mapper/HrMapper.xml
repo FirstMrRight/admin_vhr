@@ -188,6 +188,7 @@ FROM
 	LEFT JOIN role r ON hrr.rid = r.id
 WHERE
 	hr.id != #{id,jdbcType=INTEGER}
+	order by hr.id;
     </select>
     <update id="updateHr" parameterType="org.javaboy.vhr.model.Hr">
       update Hr
