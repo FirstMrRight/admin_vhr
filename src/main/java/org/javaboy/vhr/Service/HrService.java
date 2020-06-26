@@ -3,6 +3,7 @@ package org.javaboy.vhr.Service;
 import org.javaboy.vhr.mapper.HrMapper;
 import org.javaboy.vhr.mapper.HrRoleMapper;
 import org.javaboy.vhr.model.Hr;
+import org.javaboy.vhr.utils.HrUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -35,10 +36,10 @@ public class HrService implements UserDetailsService {
      * 都是Hr,查询的时候把自己去掉
      * 需要把自己的id传进去
      * @return
-     * @param id
+     * @param keywords
      */
-    public List<Hr> getAllHrs(Integer id) {
-        return hrMapper.getAllHrs(id);
+    public List<Hr> getAllHrs(String keywords) {
+        return hrMapper.getAllHrs(HrUtils.getCurrentHr().getId(),keywords);
     }
 
     public Integer updateHr(Hr hr) {
@@ -50,5 +51,9 @@ public class HrService implements UserDetailsService {
     public Boolean updateHrRole(Integer hrid,Integer[] rids) {
         hrRoleMapper.deleteByHrId(hrid);
         return hrRoleMapper.addRole(hrid,rids) == rids.length;
+    }
+
+    public Integer deleteHr(Integer id) {
+       return hrMapper.deleteByPrimaryKey(id);
     }
 }

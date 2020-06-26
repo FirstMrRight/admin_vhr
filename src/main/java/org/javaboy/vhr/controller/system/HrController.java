@@ -29,8 +29,8 @@ public class HrController {
      * @return
      */
     @GetMapping("/")
-    public List<Hr> getAllHrs(){
-        return hrService.getAllHrs(HrUtils.getCurrentHr().getId());
+    public List<Hr> getAllHrs(String keywords){
+        return hrService.getAllHrs(keywords);
     }
     @PutMapping("/")
     public RespBean updateHr(@RequestBody Hr hr) {
@@ -50,6 +50,15 @@ public class HrController {
             return RespBean.ok("更新成功");
         }else {
             return RespBean.error("更新失败");
+        }
+    }
+
+    @DeleteMapping("/{id}")
+    public RespBean deleteHr(@PathVariable Integer id){
+        if (hrService.deleteHr(id) == 1){
+            return RespBean.ok("删除成功");
+        }else {
+            return RespBean.error("删除失败");
         }
     }
 }

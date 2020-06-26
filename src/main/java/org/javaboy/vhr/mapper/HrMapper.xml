@@ -187,7 +187,10 @@ FROM
 	LEFT JOIN hr_role hrr ON hr.id = hrr.hrid
 	LEFT JOIN role r ON hrr.rid = r.id
 WHERE
-	hr.id != #{id,jdbcType=INTEGER}
+	hr.id != #{hrid}
+	<if test="keywords!=null">
+      and hr.name like concat('%',#{keywords},'%')
+    </if>
 	order by hr.id;
     </select>
     <update id="updateHr" parameterType="org.javaboy.vhr.model.Hr">
