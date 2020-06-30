@@ -61,7 +61,6 @@
 
 
   <select id="getAllmenus" resultMap="MenuWithChildren">
-    -- 笛卡尔积
 SELECT
 m1.id as id1,
 m1.`name` as name1,
