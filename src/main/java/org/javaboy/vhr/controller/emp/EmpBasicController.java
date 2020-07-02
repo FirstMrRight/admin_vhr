@@ -1,9 +1,12 @@
 package org.javaboy.vhr.controller.emp;
 
 import org.javaboy.vhr.Service.EmployeeService;
+import org.javaboy.vhr.aop.SysLog;
 import org.javaboy.vhr.model.RespPageBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+
 
 /**
  * @author Liu-PC
@@ -20,6 +23,7 @@ public class EmpBasicController {
      * @param size
      * @return
      */
+    @SysLog(value = "测试",type = "emp")
     @GetMapping("/")
     public RespPageBean getEmployeeByPage(@RequestParam(defaultValue = "1") Integer page,@RequestParam(defaultValue = "10") Integer size){
         return employeeService.getEmployeeByPage(page,size);

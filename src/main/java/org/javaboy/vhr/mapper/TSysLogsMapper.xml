@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.javaboy.vhr.mapper.TSysLogsMapper" >
+  <insert id="insert" parameterType="org.javaboy.vhr.model.TSysLogs" >
+    insert into syslogs
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id !=null">
+        id,
+      </if>
+      <if test="userid!=null">
+        userid,
+      </if>
+      <if test="operation!=null">
+        operation,
+      </if>
+      <if test="method!=null">
+        method,
+      </if>
+      <if test="url!=null">
+        url,
+      </if>
+      <if test="params!=null">
+        params,
+      </if>
+      <if test="ip!=null">
+        ip,
+      </if>
+      <if test="createdate!=null">
+        createdate,
+      </if>
+      <if test="clienttype!=null">
+        clienttype,
+      </if>
+      <if test="username!=null">
+        username,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id !=null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="userid!=null">
+        #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="operation!=null">
+        #{operation,jdbcType=VARCHAR},
+      </if>
+      <if test="method!=null">
+        #{method,jdbcType=VARCHAR},
+      </if>
+      <if test="url!=null">
+        #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="params!=null">
+        #{params,jdbcType=VARCHAR},
+      </if>
+      <if test="ip!=null">
+        #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="createdate!=null">
+        #{createdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="clienttype!=null">
+        #{clienttype,jdbcType=VARCHAR},
+      </if>
+      <if test="username!=null">
+        #{username,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+</mapper>
