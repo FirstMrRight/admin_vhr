@@ -12,7 +12,7 @@ import java.util.Date;
  *
  * </p>
  *
- * @author MC
+ * @author Liutx
  * @since 2019-03-30
  */
 @Data
@@ -22,9 +22,11 @@ public class TSysLogs {
 
     private static final long serialVersionUID = 1L;
 
-    private String id;
+    private Long id;
 
     private String userid;
+
+    private String logType;
 
     private String operation;
 
@@ -41,14 +43,36 @@ public class TSysLogs {
     private String clienttype;
 
     private String username;
+    /**
+     * 请求耗时
+     */
+    private Long time;
 
+    public Long getTime() {
+        return time;
+    }
 
+    public void setTime(Long time) {
+        this.time = time;
+    }
 
-    public String getId() {
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
+
+    public String getLogType() {
+        return logType;
+    }
+
+    public void setLogType(String logType) {
+        this.logType = logType;
+    }
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

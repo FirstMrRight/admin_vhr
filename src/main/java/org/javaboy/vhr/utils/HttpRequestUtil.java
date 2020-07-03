@@ -1,4 +1,4 @@
-package org.javaboy.vhr.aop;
+package org.javaboy.vhr.utils;
 
 import javax.servlet.http.HttpServletRequest;
 

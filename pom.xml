@@ -72,31 +72,17 @@
             <scope>provided</scope>
         </dependency>
 
-
-        <!--自己加的aop、baimidou-->
-<!--        <dependency>-->
-<!--            <groupId>org.springframework</groupId>-->
-<!--            <artifactId>spring-aop</artifactId>-->
-<!--            <version>5.2.5.RELEASE</version>-->
-<!--        </dependency>-->
-
-<!--        <dependency>-->
-<!--            <groupId>org.aspectj</groupId>-->
-<!--            <artifactId>aspectjweaver</artifactId>-->
-<!--            <version>1.9.2</version>-->
-<!--        </dependency>-->
-
-
+        <!--AOP模块-->
         <dependency>
             <groupId>org.aspectj</groupId>
             <artifactId>aspectjrt</artifactId>
-            <version>1.6.11</version>
+            <version>1.8.9</version>
         </dependency>
 
         <dependency>
             <groupId>org.aspectj</groupId>
             <artifactId>aspectjweaver</artifactId>
-            <version>1.6.11</version>
+            <version>1.9.2</version>
         </dependency>
 
         <dependency>

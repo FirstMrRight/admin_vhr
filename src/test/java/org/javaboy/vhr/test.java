@@ -25,7 +25,7 @@ public class test{
     public void test(){
         TSysLogs ts = new TSysLogs();
         ts.setIp("111");
-        ts.setId(UUID.randomUUID().toString());
+        ts.setId(UUID.randomUUID().getMostSignificantBits());
 //        ts.setId("1");
         logService.inserts(ts);
     }
