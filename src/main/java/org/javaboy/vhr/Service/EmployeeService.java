@@ -17,15 +17,19 @@ public class EmployeeService {
     @Autowired
     EmployeeMapper employeeeMapper;
 
-    public RespPageBean getEmployeeByPage(Integer page, Integer size) {
+    public RespPageBean getEmployeeByPage(Integer page, Integer size, String keyword) {
         if (page != null && size != null) {
             page = (page - 1) * size;
         }
-        List<Employee> data = employeeeMapper.getEmployeeByPage(page, size);
-        Long total = employeeeMapper.getTotal();
+        List<Employee> data = employeeeMapper.getEmployeeByPage(page, size, keyword);
+        Long total = employeeeMapper.getTotal(keyword);
         RespPageBean bean = new RespPageBean();
         bean.setData(data);
         bean.setTotal(total);
         return bean;
+    }
+
+    public Integer addEmployee(Employee employee) {
+        return employeeeMapper.insertSelective(employee);
     }
 }
