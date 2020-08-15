@@ -15,7 +15,7 @@
         <result column="phone" property="phone" jdbcType="VARCHAR"/>
         <result column="address" property="address" jdbcType="VARCHAR"/>
         <result column="departmentId" property="departmentId" jdbcType="INTEGER"/>
-        <result column="jobLevelId" property="joblevelId" jdbcType="INTEGER"/>
+        <result column="jobLevelId" property="jobLevelId" jdbcType="INTEGER"/>
         <result column="posId" property="posId" jdbcType="INTEGER"/>
         <result column="engageForm" property="engageForm" jdbcType="VARCHAR"/>
         <result column="tiptopDegree" property="tiptopDegree" jdbcType="CHAR"/>
