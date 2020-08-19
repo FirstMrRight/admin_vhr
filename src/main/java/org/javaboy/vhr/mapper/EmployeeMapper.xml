@@ -419,4 +419,8 @@
     <select id="getTotal" resultType="java.lang.Long">
     select count(*) from employee;
   </select>
+
+    <select id="getMaxWorkId" resultType="integer">
+        select max(workId) from employee;
+    </select>
 </mapper>

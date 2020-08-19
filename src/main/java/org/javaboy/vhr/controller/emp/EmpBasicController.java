@@ -1,10 +1,8 @@
 package org.javaboy.vhr.controller.emp;
 
+import javafx.geometry.Pos;
 import lombok.extern.slf4j.Slf4j;
-import org.javaboy.vhr.Service.EmployeeService;
-import org.javaboy.vhr.Service.JobLevelService;
-import org.javaboy.vhr.Service.NationService;
-import org.javaboy.vhr.Service.PoliticsstatusService;
+import org.javaboy.vhr.Service.*;
 import org.javaboy.vhr.aop.SysLog;
 import org.javaboy.vhr.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +28,8 @@ public class EmpBasicController {
     private PoliticsstatusService politicsstatusService;
     @Resource
     private JobLevelService jobLevelService;
+    @Resource
+    private PositionService positionService;
 
     /**
      * 默认查询第一页，一页十个数据
@@ -38,7 +38,7 @@ public class EmpBasicController {
      * @param size
      * @return
      */
-    @SysLog(value = "测试", type = "emp")
+//    @SysLog(value = "测试", type = "emp")
     @GetMapping("/")
     public RespPageBean getEmployeeByPage(@RequestParam(defaultValue = "1") Integer page, @RequestParam(defaultValue = "10") Integer size, String keyword) {
         return employeeService.getEmployeeByPage(page, size, keyword);
@@ -59,12 +59,29 @@ public class EmpBasicController {
     }
 
     @GetMapping("/politicsStatus")
-    public List<Politicsstatus> getAllPoliticsstatus(){
+    public List<Politicsstatus> getAllPoliticsstatus() {
         return politicsstatusService.getAllPoliticsstatus();
     }
 
     @GetMapping("/jobLevels")
-    public List<JobLevel> getAllJobLevels(){
+    public List<JobLevel> getAllJobLevels() {
         return jobLevelService.getAlljobLevels();
+    }
+
+    @GetMapping("/positions")
+    public List<Position> getAllPositions() {
+        return positionService.getAllPosition();
+    }
+
+    /**
+     * 获取最大的workId，新增人员，workId无法选择，只能自增长
+     *
+     * @return
+     */
+    @GetMapping("/maxWorkId")
+    public RespBean maxWorkId() {
+        RespBean respBean = RespBean.build().setStatus(200)
+                .setObj(String.format("%08d", employeeService.maxWorkId() + 1));
+        return respBean;
     }
 }
