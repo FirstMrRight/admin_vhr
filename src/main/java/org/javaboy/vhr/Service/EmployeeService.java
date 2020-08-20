@@ -36,4 +36,12 @@ public class EmployeeService {
     public Integer maxWorkId() {
         return employeeeMapper.getMaxWorkId();
     }
+
+    public Integer deleteEmpById(Integer id) {
+        return employeeeMapper.deleteByPrimaryKey(id);
+    }
+
+    public Integer updateEmp(Employee employee) {
+        return employeeeMapper.updateByPrimaryKey(employee);
+    }
 }

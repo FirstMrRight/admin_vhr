@@ -53,6 +53,25 @@ public class EmpBasicController {
         }
     }
 
+    @PutMapping("/")
+    public RespBean updateEmp(@RequestBody Employee employee) {
+        if (employeeService.updateEmp(employee) == 1) {
+            return RespBean.ok("更新成功");
+        } else {
+            return RespBean.error("更新失败");
+        }
+
+    }
+
+    @DeleteMapping("/{id}")
+    public RespBean deleteEmpById(@PathVariable Integer id) {
+        if (employeeService.deleteEmpById(id) == 1) {
+            return RespBean.ok("删除成功");
+        } else {
+            return RespBean.error("删除失败");
+        }
+    }
+
     @GetMapping("/nations")
     public List<Nation> getAllNation() {
         return nationService.getAllNations();
