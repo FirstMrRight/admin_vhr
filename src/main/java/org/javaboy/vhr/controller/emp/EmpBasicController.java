@@ -5,7 +5,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.javaboy.vhr.Service.*;
 import org.javaboy.vhr.aop.SysLog;
 import org.javaboy.vhr.model.*;
+import org.javaboy.vhr.utils.POIUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -30,6 +32,9 @@ public class EmpBasicController {
     private JobLevelService jobLevelService;
     @Resource
     private PositionService positionService;
+
+    @Resource
+    private DepartmentService departmentService;
 
     /**
      * 默认查询第一页，一页十个数据
@@ -102,5 +107,15 @@ public class EmpBasicController {
         RespBean respBean = RespBean.build().setStatus(200)
                 .setObj(String.format("%08d", employeeService.maxWorkId() + 1));
         return respBean;
+    }
+
+    /**
+     * execl导出用户列表
+     * @return
+     */
+    @GetMapping("/export")
+    public ResponseEntity<byte[]> exportData() {
+        List<Employee> list = (List<Employee>) employeeService.getEmployeeByPage(null, null, null).getData();
+        return POIUtils.employee2Excel(list);
     }
 }

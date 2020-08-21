@@ -1,11 +1,15 @@
 package org.javaboy.vhr.Service;
 
+import com.alibaba.druid.util.DaemonThreadFactory;
 import org.javaboy.vhr.mapper.EmployeeMapper;
 import org.javaboy.vhr.model.Employee;
 import org.javaboy.vhr.model.RespPageBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -16,6 +20,11 @@ import java.util.List;
 public class EmployeeService {
     @Autowired
     EmployeeMapper employeeeMapper;
+    //设置日期格式
+    SimpleDateFormat yearFormat = new SimpleDateFormat("yyyy");
+    SimpleDateFormat monthFormat = new SimpleDateFormat("MM");
+    //计算结果保留两位小数
+    DecimalFormat decimalFormat = new DecimalFormat("##.00");
 
     public RespPageBean getEmployeeByPage(Integer page, Integer size, String keyword) {
         if (page != null && size != null) {
@@ -30,6 +39,11 @@ public class EmployeeService {
     }
 
     public Integer addEmployee(Employee employee) {
+        Date beginContract = employee.getBeginDate();
+        Date endContract = employee.getEndContract();
+        double month = (Double.parseDouble(yearFormat.format(endContract)) - Double.parseDouble(yearFormat.format(beginContract))) * 12 +
+                (Double.parseDouble(monthFormat.format(endContract)) - Double.parseDouble(monthFormat.format(beginContract)));
+        employee.setContractTerm(Double.parseDouble(decimalFormat.format(month / 12)));
         return employeeeMapper.insertSelective(employee);
     }
 

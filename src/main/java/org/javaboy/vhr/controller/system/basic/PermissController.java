@@ -39,15 +39,6 @@ public class PermissController {
     public List<Integer> getMidsByRid(@PathVariable Integer rid){
         return menuService.getMidsByRid(rid);
     }
-//
-//    @PutMapping("/")
-//    public RespBean updateMenuRole(Integer rid,Integer[] mids){
-//        if (menuService.updateMenuRole(rid,mids)){
-//            return RespBean.ok("更新成功");
-//        }else {
-//            return RespBean.error("更新失败");
-//        }
-//    }
 
     @PutMapping("/")
     public RespBean updateMenuRole(Integer rid, Integer[] mids) {

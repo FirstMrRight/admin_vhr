@@ -413,8 +413,10 @@
         <if test="keyword != null and keyword!=''">
             and e.name like concat('%',#{keyword},'%')
         </if>
-        limit
-        #{page},#{size}
+        <if test="page!=null and size!=null">
+            limit
+            #{page},#{size}
+        </if>
     </select>
     <select id="getTotal" resultType="java.lang.Long">
     select count(*) from employee;
