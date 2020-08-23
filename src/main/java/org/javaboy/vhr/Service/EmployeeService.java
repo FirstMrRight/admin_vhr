@@ -1,6 +1,7 @@
 package org.javaboy.vhr.Service;
 
 import com.alibaba.druid.util.DaemonThreadFactory;
+import org.apache.ibatis.annotations.Param;
 import org.javaboy.vhr.mapper.EmployeeMapper;
 import org.javaboy.vhr.model.Employee;
 import org.javaboy.vhr.model.RespPageBean;
@@ -57,5 +58,9 @@ public class EmployeeService {
 
     public Integer updateEmp(Employee employee) {
         return employeeeMapper.updateByPrimaryKey(employee);
+    }
+
+    public Integer addEmps(@Param("list") List<Employee> list) {
+        return employeeeMapper.addEmps(list);
     }
 }

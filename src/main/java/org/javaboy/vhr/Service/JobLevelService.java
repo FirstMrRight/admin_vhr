@@ -15,8 +15,8 @@ import java.util.List;
 public class JobLevelService {
     @Autowired
     JobLevelMapper jobLevelMapper;
-    public List<JobLevel> getAlljobLevels() {
-        return jobLevelMapper.getAlljobLevels();
+    public List<JobLevel> getAllJobLevels() {
+        return jobLevelMapper.getAllJobLevels();
     }
 
     public Integer addJobLevel(JobLevel jobLevel) {

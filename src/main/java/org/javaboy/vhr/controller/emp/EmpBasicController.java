@@ -1,16 +1,16 @@
 package org.javaboy.vhr.controller.emp;
 
-import javafx.geometry.Pos;
 import lombok.extern.slf4j.Slf4j;
 import org.javaboy.vhr.Service.*;
-import org.javaboy.vhr.aop.SysLog;
 import org.javaboy.vhr.model.*;
 import org.javaboy.vhr.utils.POIUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 
@@ -89,7 +89,7 @@ public class EmpBasicController {
 
     @GetMapping("/jobLevels")
     public List<JobLevel> getAllJobLevels() {
-        return jobLevelService.getAlljobLevels();
+        return jobLevelService.getAllJobLevels();
     }
 
     @GetMapping("/positions")
@@ -117,5 +117,29 @@ public class EmpBasicController {
     public ResponseEntity<byte[]> exportData() {
         List<Employee> list = (List<Employee>) employeeService.getEmployeeByPage(null, null, null).getData();
         return POIUtils.employee2Excel(list);
+    }
+
+    /**
+     * 导入数据，先上传到服务再解析excel
+     * @param file
+     * @return
+     */
+    @PostMapping("/import")
+    public RespBean importData(MultipartFile file)throws Exception{
+
+        List<Employee> list = POIUtils.excel2Employee(file,
+                nationService.getAllNations(),
+                politicsstatusService.getAllPoliticsstatus(),
+                departmentService.getAllDepartmentsWithOutChildren(),
+                positionService.getAllPosition(),
+                jobLevelService.getAllJobLevels());
+        list.forEach(System.out::println);
+
+        //把导入的数据插入到数据库
+        if (employeeService.addEmps(list)==list.size()){
+            return RespBean.ok("上传成功");
+        }else {
+            return RespBean.error("上传失败");
+        }
     }
 }

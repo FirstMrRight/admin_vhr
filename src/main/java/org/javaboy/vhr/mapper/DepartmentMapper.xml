@@ -41,6 +41,13 @@
     from department
     where id = #{id,jdbcType=INTEGER}
   </select>
+
+  <select id="getAllDepartmentsWithOutChildren" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"></include>
+    from department;
+  </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from department
     where id = #{id,jdbcType=INTEGER}

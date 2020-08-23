@@ -17,7 +17,7 @@ public class JobLevelController {
     JobLevelService jobLevelService;
     @GetMapping("/")
     public List<JobLevel> getAllJobLevels() {
-        return jobLevelService.getAlljobLevels();
+        return jobLevelService.getAllJobLevels();
     }
 
     @PostMapping("/")

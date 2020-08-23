@@ -90,7 +90,11 @@
       enabled = #{enabled,jdbcType=BIT}
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <select id="getAlljobLevels" resultMap="BaseResultMap">
+<!--  <select id="getAlljobLevels" resultMap="BaseResultMap">-->
+<!--    select * from joblevel;-->
+<!--  </select>-->
+
+  <select id="getAllJobLevels" resultMap="BaseResultMap">
     select * from joblevel;
   </select>
   <delete id="deleteJobLevelsByIds">
